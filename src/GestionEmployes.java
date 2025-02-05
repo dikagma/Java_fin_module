@@ -97,11 +97,17 @@ static void  afficherEmployes(){
         Arrays.sort(employes, 0, count, ordreCroissant ? Employe.compareParSalaire : Employe.compareParSalaire.reversed());
         afficherEmployes();
     }
-
-/*
-
-
- */
+//Supprimer un employé
+ static void supprimerEmploye(int id) {
+     for(int j=0;j<employes.length;j++) {
+         if(employes[j] !=null) { //controler la case vide
+             if (employes[j].getId() == id) {
+                 employes[j]=null;
+             }
+         }
+     }
+     afficherEmployes();
+    }
 
 /* rechercher un employé par nom ou par post; j'ai utilisé l'opérateur OU pour
    comparer le critère
@@ -130,7 +136,8 @@ static double calculerMasseSalariale(){
     return masseSalariale;
 }
 public static void main(String[] args) {
-   while(true) {
+    boolean debut=true;
+   while(debut) {
        printMenu();
        System.out.println("Choisissez une option:");
        Scanner clavier = new Scanner(System.in);
@@ -176,7 +183,9 @@ public static void main(String[] args) {
                    modifierEmploye(idEmploye, nomEmploye, nomPost, salaireEmploye);
                    break;
                    case 3 :
-
+                       System.out.println("Saisissez l'id de l'employé");
+                       idEmploye=clavier.nextInt();
+                       supprimerEmploye(idEmploye);
                        break;
                        case 4 :
                            afficherEmployes();
@@ -208,6 +217,14 @@ public static void main(String[] args) {
                                        }while(critereValide!=true);
 
                                        break;
+                                       case 0 :
+                                           System.out.println("Programme terminé");
+                                           debut=false;
+                                           break;
+           default:
+               System.out.println("Eurrer:Veuillez entrer un nombre entre 0 et 6");
+
+
        }
 
 
